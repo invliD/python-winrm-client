@@ -4,6 +4,7 @@ from xml.etree import ElementTree
 import pywsman
 
 from winrm import uris
+from winrm.error import WinRMError
 
 class Client(object):
 
@@ -30,6 +31,10 @@ class Client(object):
 
 		resource_uri = cls.resource_uri()
 		doc = self.client.enumerate(options, None, resource_uri)
+		if doc is None:
+			error_code = self.client.last_error()
+			error_msg = self.client.transport().error_string(error_code)
+			raise WinRMError(error_code, error_msg)
 		root = _get_root(doc)
 		result += self._parse_items(cls, root)
 
