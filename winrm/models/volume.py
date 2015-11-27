@@ -44,8 +44,8 @@ class Volume(BaseModel):
 			caption=d['Caption'],
 			drive_letter = d['DriveLetter'],
 			description = d['Description'],
-			capacity = int(d['Capacity']),
-			free_space = int(d['FreeSpace']),
+			capacity = int(d['Capacity']) if d['Capacity'] is not None else None,
+			free_space = int(d['FreeSpace']) if d['FreeSpace'] is not None else None,
 			type = int(d['DriveType']),
 			file_system = d['FileSystem'],
 		)
