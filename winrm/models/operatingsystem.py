@@ -15,9 +15,6 @@ class OperatingSystem(BaseModel):
 	def __str__(self):
 		return 'OperatingSystem'
 
-	def __repr__(self):
-		return 'OperatingSystem({})'.format(', '.join('{}={}'.format(k, repr(v)) for (k,v) in self.__dict__.iteritems() if v is not None))
-
 	@classmethod
 	def from_dict(cls, d):
 		return cls(

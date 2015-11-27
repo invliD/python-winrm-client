@@ -34,9 +34,6 @@ class Volume(BaseModel):
 	def __str__(self):
 		return self.label
 
-	def __repr__(self):
-		return 'Volume({})'.format(', '.join('{}={}'.format(k, repr(v)) for (k,v) in self.__dict__.iteritems() if v is not None))
-
 	@classmethod
 	def from_dict(cls, d):
 		return cls(
