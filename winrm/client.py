@@ -9,7 +9,7 @@ from winrm.error import WinRMError
 class Client(object):
 
 	def __init__(self, host, user, password, protocol='http', port=None, path='/wsman',
-		timeout=30):
+		timeout=30, verify_ssl=True):
 		if port is None:
 			if protocol == 'http':
 				port = 5985
@@ -25,6 +25,8 @@ class Client(object):
 		)
 		self.client.transport().set_auth_method(pywsman.BASIC_AUTH_STR)
 		self.client.transport().set_timeout(timeout)
+		self.client.transport().set_verify_peer(verify_ssl)
+		self.client.transport().set_verify_host(verify_ssl)
 
 	def enumerate(self, cls):
 		options = pywsman.ClientOptions()
