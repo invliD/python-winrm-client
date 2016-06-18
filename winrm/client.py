@@ -63,7 +63,14 @@ class Client(object):
 				if nil_str == 'true':
 					attributes[tag_name] = None
 				else:
-					attributes[tag_name] = attr.text
+					if tag_name in attributes:
+						# It's already there, so it's a list.
+						if isinstance(attributes[tag_name], str):
+							attributes[tag_name] = (attributes[tag_name], attr.text)
+						else:
+							attributes[tag_name] = attributes[tag_name] + (attr.text,)
+					else:
+						attributes[tag_name] = attr.text
 			obj = cls.from_dict(attributes)
 			result.append(obj)
 		return result
