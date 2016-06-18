@@ -34,7 +34,10 @@ setup(
 
 	keywords='winrm monitoring wsman',
 
-	packages=['winrm'],
+	packages=[
+		'winrm',
+		'winrm.models',
+	],
 
 	install_requires=[
 		'pywsman',
